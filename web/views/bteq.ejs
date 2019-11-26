@@ -9,20 +9,20 @@
   <body>
     <div class="grid-container">
         <header class="grid-item page_header">
-            Logon and Set Width command
+            Logon and Set Width commands
         </header>
 
-        <form method="POST" class="grid-item form_lable"
+        <form method="POST" class="form_lable"
                                    action="http://localhost:3000">
-            <label>Logon:</label> <br />
+            Logon: <br />
             <input type="text" name="logon" placeholder=".logon host:port/user,pass"
                                    required /> <br />
-            <label>Set Width:</label> <br />
+            Set Width: <br />
             <input type="text"  name="set-width"
                                    placeholder=".set width 'number'" /> <br />
-            <label>Select:</label> <br />
+            Select: <br />
             <input type="text" name="select" placeholder="select..." /> <br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" class="submit_class" />
         </form>
         <div class="grid-item output_div">
             <pre> <%= data %> </pre>
