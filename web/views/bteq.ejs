@@ -1,43 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="/bteq.css" />
-
-    <title>BTEQ</title>
-  </head>
-  <body>
-    <div class="grid-container">
-        <header class="grid-item page_header">
-            Logon and Set Width commands
-        </header>
-
-        <form method="POST" class="form_lable" action="http://localhost:3000">
-            Logon: <br />
-            <input type="text" name="logon" placeholder=".logon host:port/user,pass"
-                                   required /> <br />
-            Set Width: <br />
-            <input type="text"  name="set-width"
-                                   placeholder=".set width 'number'" /> <br />
-            Select: <br />
-            <input type="text" name="select" placeholder="select..." /> <br />
-            <input type="submit" value="Submit" class="submit_class" />
-        </form>
-        <div class="grid-item output_div">
-            <pre> <%= data %> </pre>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="/bteq.css" />
+        <script src="check_input.js"></script>
+        <title>BTEQ</title>
+    </head>
+    <body>
+        <div class="grid-container">
+            <header class="grid-item page_header">
+                LOGON and SET WIDTH commands
+            </header>
+            <form method="POST" class="form_label" action="http://localhost:3000">
+                <label>Logon:</label>
+                <input type="text" name="logon" placeholder=".logon host:port/user,pass"
+                                                required />
+                <label>Set Width:</label>
+                <input type="text" name="set-width" placeholder=".set width 'number'" />
+                <label>Select:</label>
+                <input type="text" name="select" placeholder="select..." />
+                <input type="submit" value="Submit" class="submit_class" />
+            </form>
+            <div class="grid-item output_div">
+                <pre> <%= data %> </pre>
+            </div>
+            <footer class="grid-item page_footer">
+                An interface that works in place of the Teradata BTEQ interface.
+                BTEQ is a general-purpose, command-based program that allows users
+                to communicate with one or more Teradata servers, and to format
+                reports for both print and screen output. BTEQ allows users to
+                submit SQL queries to Teradata Database. BTEQ formats the results
+                and returns them to the screen, a file, or to a printer.
+            </footer>
         </div>
-
-        <footer class="grid-item page_footer">
-            BTEQ is optimized for learning, testing, and training.
-            Examples might be simplified to improve reading and basic
-            understanding. Tutorials, references, and examples are
-            constantly reviewed to avoid errors, but we cannot warrant
-            full correctness of all content. While using this site, you
-            agree to have read and accepted our terms of use, cookie and
-            privacy policy. Copyright 1999-2019 by Refsnes
-            Data. All Rights Reserved.
-        </footer>
-    </div>
-  </body>
+    </body>
 </html>
-
