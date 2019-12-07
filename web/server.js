@@ -18,14 +18,31 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     var {'logon' : log, 'set-width' : wid, 'select' : sel} = req.body;
-    fs.writeFile(cmd_file, `${log}\n${wid}\n${sel}`, async function(err) {
-        if (err) throw err;
-        await exec_cmd(cmd_file);
-        fs.readFile('out.bteq', 'utf8', function(err, data) {
+    var logon = undefined;
+    var set = undefined;
+    var select = undefined;
+
+    if (!!log.trim()) {
+        logon = log.match(/^\.[a-zA-Z0-9_$]/g);
+    }
+    if (!!wid.trim()) {
+        set = wid.match(/^\.[a-zA-Z0-9_$]/g);
+    }
+    if (!!sel.trim()) {
+        select = sel.match(/^select/gi);
+    }
+    if (logon === null || set === null || select === null) {
+        res.render('bteq', {data : "Incorrect input value"});
+    } else {
+        fs.writeFile(cmd_file, `${log}\n${wid}\n${sel}`, async function(err) {
             if (err) throw err;
-            res.render('bteq', {data});
+            await exec_cmd(cmd_file);
+            fs.readFile('out.bteq', 'utf8', function(err, data) {
+                if (err) throw err;
+                res.render('bteq', {data});
+            });
         });
-    });
+    }
 });
 
 app.listen(port, function() {
