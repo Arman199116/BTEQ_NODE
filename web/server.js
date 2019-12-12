@@ -32,16 +32,21 @@ app.post('/', (req, res) => {
         select = sel.match(/^select/gi);
     }
     if (logon === null || set === null || select === null) {
+        res.status(400);
+        res.set('Content-Type', 'text/html');
         res.render('bteq', {data : "Incorrect input value"});
+        res.end("Bad Request");
     } else {
         try {
             fs.writeFile(cmd_file, `${log}\n${wid}\n${sel}`, async(err) => {
-                if (err) throw err;
+                if (err) console.error(err);
                 await exec_cmd(cmd_file);
                 try {
-                    fs.readFile('out.bteq', 'utf8', (err, data) => {
+                    fs.readFile("out.bteq", 'utf8', (err, data) => {
                         if (err) throw err;
+                        res.status(201).set('Content-Type', 'text/html');
                         res.render('bteq', {data});
+                        res.end();
                     });
                 } catch(err) {
                     if (err) console.error(err);
@@ -49,11 +54,14 @@ app.post('/', (req, res) => {
             });
         } catch(err) {
             if (err) console.error(err);
+            res.status(500);
+            res.set('Content-Type', 'text/plain');
+            res.send("Internal Server Error");
         }
     }
 });
 
 app.listen(port, () => {
     console.log("BTEQ app listening at http://127.0.0.1:%s", port);
-    open(`http://127.0.0.1:${port}`);
+    //open(`http://127.0.0.1:${port}`);
 });
